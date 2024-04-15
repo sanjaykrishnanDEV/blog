@@ -1,7 +1,30 @@
+'use client'
 import Navbar from "@/components/Navbar";
 import BlogCard from "@/components/BlogCard";
 import Image from "next/image";
+import { useState,useEffect } from "react";
 export default function Home() {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await fetch('https://buf-strapi-cms.onrender.com/api/blogs', {
+          headers: {
+            Authorization: `Bearer 7d684d27cb212cc9abd84cf411c7ea6f74f31b674111c316201d191fdb41ab6dd0729f7d82b841ea9d56b4af97623a1c3e0297e6beee4168bd460f792bfa4692db05c8594b9787ae58380ad86e2f7089a4fe211f7b6838f6951cd010232b43bc07d8481c9504c1c3ab53339a594485a597915ed1ac8dd285d819638df08277e6`,
+          },
+        });
+        if (!res.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const jsonData = await res.json();
+        setData(jsonData);
+        console.log(data)
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
   return (
     <div>
       <Navbar />
@@ -35,7 +58,10 @@ export default function Home() {
             </li>
           </ul>
         </div>
-        <BlogCard />
+        {data && data.map((blog)=>{
+          return <BlogCard title={data.data.attributes.title} description={data.data.attributes.title} media={data.data.attributes.title} createdat={data.data.attributes.title}/>
+        })}
+
       </div>
     </div>
   );
