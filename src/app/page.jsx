@@ -9,13 +9,13 @@ export default function Home() {
         <div className="flex justify-between items-center text-black">
           <h1 className="text-[40px]">Blog</h1>
           <ul className=" list-none flex">
-            <li className=" hover:bg-green-500">
-              <button className="text-[blue] flex">
+            <li className="hover:text-[#1047c6] hover:bg-[rgba(26,_87,_230,_.1)] rounded p-2">
+              <button className="text-[#1a57e6] flex text-[1rem] font-medium">
                 Follow Userflow on Twitter
                 <span>
                   <svg
                     class="svg-inline--fa fa-twitter"
-                    className="mt-[5px] mx-[10px]"
+                    className="mt-[5px] ml-[10px]"
                     aria-hidden="true"
                     focusable="false"
                     data-prefix="fab"
