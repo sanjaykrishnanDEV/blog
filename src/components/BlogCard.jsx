@@ -21,7 +21,7 @@ const BlogCard = () => {
           <span className="font-medium">Sebastian Seilund</span> on Apr 8, 2024
         </div>
       </div>
-      <div className="text-[1rem] leading-[1.75em] text-[#132B39]">
+      <div className="text-[1rem] leading-[1.75em] text-[#132B39]">``
         <Markdown options={{ wrapper: "paragraph" }}>
           We have improved the export function of our analytics. Now, when you
           export data from your Analytics, covering **flows, checklists,
