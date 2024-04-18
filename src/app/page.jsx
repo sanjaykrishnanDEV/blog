@@ -1,44 +1,51 @@
-'use client'
-import Navbar from "@/components/Navbar";
-import BlogCard from "@/components/BlogCard";
-import Image from "next/image";
-import { useState,useEffect } from "react";
+"use client";
+import { useState, useEffect } from "react";
+import Navbar from "../app/components/Navbar";
+import BlogCard from "../app/components/BlogCard";
+
 export default function Home() {
   const [data, setData] = useState(null);
+
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch('https://buf-strapi-cms.onrender.com/api/blogs', {
-          headers: {
-            Authorization: `Bearer 7d684d27cb212cc9abd84cf411c7ea6f74f31b674111c316201d191fdb41ab6dd0729f7d82b841ea9d56b4af97623a1c3e0297e6beee4168bd460f792bfa4692db05c8594b9787ae58380ad86e2f7089a4fe211f7b6838f6951cd010232b43bc07d8481c9504c1c3ab53339a594485a597915ed1ac8dd285d819638df08277e6`,
-          },
-        });
+        const res = await fetch(
+          "https://buf-strapi-cms.onrender.com/api/blogs?populate=*",
+          {
+            headers: {
+              Authorization: `Bearer e7d3d2be8613091f48062bf111e0e0081b63d2566f13d42f2cb71427af694128419355531ec50128a0f6a0cfba4744097545016e05ca80f5927f09274eeee3a53c877e99e75a54995537a9c891bf32dc6b33173904831713a136d60a6d4ad746bd3029e33e93777880002bcd3a8bc6598727467d18d6597807e173224da2077b`,
+            },
+          }
+        );
         if (!res.ok) {
-          throw new Error('Failed to fetch data');
+          throw new Error("Failed to fetch data");
         }
         const jsonData = await res.json();
-        setData(jsonData);
-        console.log(data)
+        setData(jsonData.data); // Extracting the data object from the response
+        console.log(jsonData.data); // Logging jsonData.data instead of data
       } catch (error) {
         console.error(error);
       }
     }
+
     fetchData();
   }, []);
+
+  useEffect(() => console.log("data", data), [data]);
+
   return (
     <div>
       <Navbar />
-      <div className="container  mt-[100px] w-[770px] mx-auto">
+      <div className="container mt-[100px] w-[770px] mx-auto">
         <div className="flex justify-between items-center text-black">
           <h1 className="text-[40px]">Blog</h1>
-          <ul className=" list-none flex">
-            <li className=" hover:bg-green-500">
+          <ul className="list-none flex">
+            <li className="hover:bg-green-500">
               <button className="text-[blue] flex">
                 Follow Userflow on Twitter
                 <span>
                   <svg
-                    class="svg-inline--fa fa-twitter"
-                    className="mt-[5px] mx-[10px]"
+                    className="svg-inline--fa fa-twitter mt-[5px] mx-[10px]"
                     aria-hidden="true"
                     focusable="false"
                     data-prefix="fab"
@@ -58,10 +65,16 @@ export default function Home() {
             </li>
           </ul>
         </div>
-        {data && data.map((blog)=>{
-          return <BlogCard title={data.data.attributes.title} description={data.data.attributes.title} media={data.data.attributes.title} createdat={data.data.attributes.title}/>
-        })}
-
+        {data &&
+          data.map((d) => (
+            <BlogCard
+              key={d.id} // Assuming there's an id field in data
+              title={d.attributes.title}
+              description={d.attributes.description}
+              media={d?.attributes.media}
+              createdat={d.attributes.createdAt} // Assuming createdAt is available
+            />
+          ))}
       </div>
     </div>
   );
