@@ -21,7 +21,7 @@ const BlogCard = ({ title, description, media, createdat }) => {
       <br />
       {media?.data[0]?.attributes?.url && (
         <Image
-          src={`http://localhost:1337${media.data[0].attributes.url}`}
+          src={`https://buf-strapi-cms.onrender.com${media.data[0].attributes.url}`}
           width={500}
           height={500}
           alt="Image"

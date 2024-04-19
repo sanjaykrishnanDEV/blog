@@ -13,7 +13,7 @@ export default function Home() {
           "https://buf-strapi-cms.onrender.com/api/blogs?populate=*",
           {
             headers: {
-              Authorization: `Bearer e7d3d2be8613091f48062bf111e0e0081b63d2566f13d42f2cb71427af694128419355531ec50128a0f6a0cfba4744097545016e05ca80f5927f09274eeee3a53c877e99e75a54995537a9c891bf32dc6b33173904831713a136d60a6d4ad746bd3029e33e93777880002bcd3a8bc6598727467d18d6597807e173224da2077b`,
+              Authorization: `Bearer 99be02237d2b02a876bfa126a322568a79c1c0a50c28ff13e32855d7cb3514e73b223f7107c855c0054464f8726250f46240055d76e0f578403a19a42db45b1d1ed6da24ac9cd95d68077b81e7536610bffecdeee692b64ef5fedea23c0c9eb9450765d085d292d51edc9b6232bfc5e7e34da7d1cf8aa357ef88a784c370a779`,
             },
           }
         );
